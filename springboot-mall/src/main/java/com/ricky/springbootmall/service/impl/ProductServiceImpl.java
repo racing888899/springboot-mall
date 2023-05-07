@@ -7,11 +7,18 @@ import com.ricky.springbootmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProudctDao proudctDao;
+
+    @Override
+    public List<Product> getProducts() {
+        return proudctDao.getProducts();
+    }
 
     @Override
     public Product getProductById(Integer productId) {
