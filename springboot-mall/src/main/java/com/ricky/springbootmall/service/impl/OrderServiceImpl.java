@@ -4,6 +4,7 @@ import com.ricky.springbootmall.dao.OrderDao;
 import com.ricky.springbootmall.dao.ProudctDao;
 import com.ricky.springbootmall.dto.BuyItem;
 import com.ricky.springbootmall.dto.CreateOrderRequest;
+import com.ricky.springbootmall.model.Order;
 import com.ricky.springbootmall.model.OrderItem;
 import com.ricky.springbootmall.model.Product;
 import com.ricky.springbootmall.service.OrderService;
@@ -22,6 +23,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProudctDao proudctDao;
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+        Order order = orderDao.getOrderById(orderId);
+
+        List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(orderId);
+
+        order.setOrderItemList(orderItemList);
+
+        return order;
+    }
 
     @Transactional
     @Override
