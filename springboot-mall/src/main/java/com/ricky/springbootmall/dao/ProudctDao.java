@@ -1,5 +1,6 @@
 package com.ricky.springbootmall.dao;
 
+import com.ricky.springbootmall.constant.ProductCategory;
 import com.ricky.springbootmall.dto.ProductRequest;
 import com.ricky.springbootmall.model.Product;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface ProudctDao {
 
-    List<Product> getProducts();
+    List<Product> getProducts(ProductCategory category, String search);
 
     Product getProductById(Integer productId);
 
