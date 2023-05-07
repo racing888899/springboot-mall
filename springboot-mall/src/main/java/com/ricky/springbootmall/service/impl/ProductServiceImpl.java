@@ -1,7 +1,7 @@
 package com.ricky.springbootmall.service.impl;
 
-import com.ricky.springbootmall.constant.ProductCategory;
 import com.ricky.springbootmall.dao.ProudctDao;
+import com.ricky.springbootmall.dto.ProductQueryParams;
 import com.ricky.springbootmall.dto.ProductRequest;
 import com.ricky.springbootmall.model.Product;
 import com.ricky.springbootmall.service.ProductService;
@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProudctDao proudctDao;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
-        return proudctDao.getProducts(category, search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return proudctDao.getProducts(productQueryParams);
     }
 
     @Override

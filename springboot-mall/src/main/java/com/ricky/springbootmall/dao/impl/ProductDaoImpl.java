@@ -1,7 +1,7 @@
 package com.ricky.springbootmall.dao.impl;
 
-import com.ricky.springbootmall.constant.ProductCategory;
 import com.ricky.springbootmall.dao.ProudctDao;
+import com.ricky.springbootmall.dto.ProductQueryParams;
 import com.ricky.springbootmall.dto.ProductRequest;
 import com.ricky.springbootmall.model.Product;
 import com.ricky.springbootmall.rowmapper.ProductRowMapper;
@@ -24,7 +24,7 @@ public class ProductDaoImpl implements ProudctDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
         String sql = "SELECT product_id, product_name, category, " +
                 "image_url, price, stock, description, " +
                 "created_date, last_modified_date " +
@@ -32,14 +32,14 @@ public class ProductDaoImpl implements ProudctDao {
 
         Map<String ,Object> map = new HashMap<>();
 
-        if (category != null) {
+        if (productQueryParams.getCategory() != null) {
             sql = sql + " AND category = :category";
-            map.put("category", category.name());//Enum轉字串用 name()
+            map.put("category", productQueryParams.getCategory().name());//Enum轉字串用 name()
         }
 
-        if (search != null) {
+        if (productQueryParams.getSearch() != null) {
             sql = sql + " AND product_name LIKE :search";
-            map.put("search", "%" + search + "%");
+            map.put("search", "%" + productQueryParams.getSearch() + "%");
         }
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
